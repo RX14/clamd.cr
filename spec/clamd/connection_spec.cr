@@ -233,7 +233,7 @@ describe Clamd::Connection do
 
           result.filename.should eq("stream")
           result.status.should eq(Clamd::Status::Virus)
-          result.signature.should eq("{HEX}EICAR.TEST.10.UNOFFICIAL")
+          result.signature.should match(/eicar.test/i)
         end
       end
     end
