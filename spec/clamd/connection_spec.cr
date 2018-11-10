@@ -165,7 +165,7 @@ describe Clamd::Connection do
   describe "#version" do
     it "responds with the clamav version" do
       clamd_connection do |conn|
-        conn.version.should match(/^ClamAV [0-9]+\.[0-9]+\.[0-9]+$/)
+        conn.version.should match(/^ClamAV [0-9]+\.[0-9]+\.[0-9]+/)
       end
     end
 
