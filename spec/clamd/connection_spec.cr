@@ -21,7 +21,7 @@ describe Clamd::Connection do
 
   describe ".new" do
     it "starts an IDSESSION" do
-      io = MemoryIO.new
+      io = IO::Memory.new
       connection = Clamd::Connection.new(io)
       io.to_s.should eq("zIDSESSION\0")
     end
@@ -115,7 +115,7 @@ describe Clamd::Connection do
     it "doesn't detect errors with `detect_error: false`" do
       clamd_connection do |conn|
         conn.send("INVALIDCOMMAND", detect_error: false)
-            .should eq("Command invalid inside IDSESSION. ERROR")
+          .should eq("Command invalid inside IDSESSION. ERROR")
       end
     end
 
@@ -136,7 +136,7 @@ describe Clamd::Connection do
     end
 
     it "raises when closed" do
-      conn = Clamd::Connection.new(MemoryIO.new)
+      conn = Clamd::Connection.new(IO::Memory.new)
       conn.close
 
       expect_raises(Clamd::Connection::Error, "Connection closed") do
@@ -153,7 +153,7 @@ describe Clamd::Connection do
     end
 
     it "raises when closed" do
-      conn = Clamd::Connection.new(MemoryIO.new)
+      conn = Clamd::Connection.new(IO::Memory.new)
       conn.close
 
       expect_raises(Clamd::Connection::Error, "Connection closed") do
@@ -170,7 +170,7 @@ describe Clamd::Connection do
     end
 
     it "raises when closed" do
-      conn = Clamd::Connection.new(MemoryIO.new)
+      conn = Clamd::Connection.new(IO::Memory.new)
       conn.close
 
       expect_raises(Clamd::Connection::Error, "Connection closed") do
@@ -215,7 +215,7 @@ describe Clamd::Connection do
     {% end %}
 
     it "raises when closed" do
-      conn = Clamd::Connection.new(MemoryIO.new)
+      conn = Clamd::Connection.new(IO::Memory.new)
       conn.close
 
       expect_raises(Clamd::Connection::Error, "Connection closed") do
@@ -263,18 +263,18 @@ describe Clamd::Connection do
     end
 
     it "raises when closed" do
-      conn = Clamd::Connection.new(MemoryIO.new)
+      conn = Clamd::Connection.new(IO::Memory.new)
       conn.close
 
       expect_raises(Clamd::Connection::Error, "Connection closed") do
-        conn.scan_stream(MemoryIO.new)
+        conn.scan_stream(IO::Memory.new)
       end
     end
   end
 
   describe "#close" do
     it "closes the connection" do
-      io = MemoryIO.new
+      io = IO::Memory.new
       conn = Clamd::Connection.new(io)
       conn.close
 
